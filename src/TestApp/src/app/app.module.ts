@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { GetPatientsComponent } from './get-patients/get-patients.component';
 import { AddPatientComponent } from './add-patient/add-patient.component';
 import { EditPatientComponent } from './edit-patient/edit-patient.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { EditPatientComponent } from './edit-patient/edit-patient.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
