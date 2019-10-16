@@ -1,32 +1,60 @@
-<div class="card">  
-    <div class="card-body">  
-      <form>
-        <div class="form-group row">  
-          <label class="col-md-4">Patient name</label>  
-          <input type="text" class="form-control col-md-6" />  
+<div class="card">
+    <div class="card-body">
+      <form [formGroup]="angForm" novalidate>
+        <div class="form-group row">
+          <label class="col-sm-2">Patient name</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" formControlName="PatientName" #PatientName/>
+            <div *ngIf="angForm.controls['PatientName'].invalid && (angForm.controls['PatientName'].dirty || angForm.controls['PatientName'].touched)" class="alert alert-danger">  
+              <div *ngIf="angForm.controls['PatientName'].errors.required">  
+                Patient Name is required.  
+              </div>  
+            </div>
+          </div>
         </div>
-        <div class="form-group row">  
-          <label class="col-md-4">Patient gender</label>
-          <div class="btn-group btn-group-toggle" ngbRadioGroup>
-            <label ngbButtonLabel class="btn-primary">
-              <input ngbButton type="radio" value="1"> Male
-            </label>
-            <label ngbButtonLabel class="btn-primary">
-              <input ngbButton type="radio" [value]="2"> Female
-            </label>
+        <div class="form-group row">
+          <label class="col-sm-2">Patient gender</label>
+          <div class="col-sm-10">
+            <div class="btn-group btn-group-toggle" ngbRadioGroup>
+              <label ngbButtonLabel class="btn-primary">
+                <input ngbButton type="radio" formControlName="PatientGender" value="1" #PatientGender> Male
+              </label>
+              <label ngbButtonLabel class="btn-primary">
+                <input ngbButton type="radio" formControlName="PatientGender" value="2" #PatientGender> Female
+              </label>
+            </div>
+            <div *ngIf="angForm.controls['PatientGender'].invalid && (angForm.controls['PatientGender'].dirty || angForm.controls['PatientGender'].touched)" class="alert alert-danger">  
+              <div *ngIf="angForm.controls['PatientGender'].errors.required">  
+                Patient gender is required.  
+              </div>  
+            </div> 
           </div>
         </div>
         <div class="form-group row">  
-          <label class="col-md-4">Date of birth </label>
-          <ngb-datepicker #d></ngb-datepicker>
+          <label class="col-sm-2">Date of birth </label>
+          <div class="col-sm-10">
+            <ngb-datepicker #PatientDob formControlName="PatientDob" [minDate]="{year: 1900, month: 1, day: 1}" [maxDate]="maxDate"></ngb-datepicker>          
+            <div *ngIf="angForm.controls['PatientDob'].invalid && (angForm.controls['PatientDob'].dirty || angForm.controls['PatientDob'].touched)" class="alert alert-danger">  
+              <div *ngIf="angForm.controls['PatientDob'].errors.required">  
+                Patient DOB is required.  
+              </div>  
+            </div>
+          </div>
         </div>  
         <div class="form-group row">  
-          <label class="col-md-4">NID/Passport number</label>  
-          <input type="text" class="form-control col-md-6" />  
+          <label class="col-sm-2">NID/Passport number</label>  
+          <div class="col-sm-10">
+            <input type="text" formControlName="PatientNid" class="form-control" #PatientNid/>
+            <div *ngIf="angForm.controls['PatientNid'].invalid && (angForm.controls['PatientNid'].dirty || angForm.controls['PatientNid'].touched)" class="alert alert-danger">  
+              <div *ngIf="angForm.controls['PatientNid'].errors.required">  
+                Patient ID is required.  
+              </div>  
+            </div>
+          </div>
         </div>  
-        <div class="form-group">  
-          <button type="submit" class="btn btn-primary">Add Patient</button>  
-        </div>  
-      </form>  
-    </div>  
-  </div>  
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary" [disabled]="angForm.pristine || angForm.invalid" >Add Patient</button>
+        </div>
+      </form>
+    </div>
+  </div>
